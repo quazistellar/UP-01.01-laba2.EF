@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище UP_laba_1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PilotsOfShip">
+          <Key>
+            <PropertyRef Name="ID_Pilot" />
+          </Key>
+          <Property Name="ID_Pilot" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NamePilot" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SurnamePilot" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="AgePilot" Type="int" Nullable="false" />
+          <Property Name="SpaceShip_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="ShipsTypes">
+          <Key>
+            <PropertyRef Name="ID_TypeShip" />
+          </Key>
+          <Property Name="ID_TypeShip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Types_Name" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SpaceShips">
+          <Key>
+            <PropertyRef Name="ID_SpaceShip" />
+          </Key>
+          <Property Name="ID_SpaceShip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameShip" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="AmountFlights" Type="int" Nullable="false" />
+          <Property Name="TypeShip_ID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK__PilotsOfS__Space__5070F446">
+          <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="0..1" />
+          <End Role="PilotsOfShip" Type="Self.PilotsOfShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpaceShips">
+              <PropertyRef Name="ID_SpaceShip" />
+            </Principal>
+            <Dependent Role="PilotsOfShip">
+              <PropertyRef Name="SpaceShip_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SpaceShip__TypeS__4CA06362">
+          <End Role="ShipsTypes" Type="Self.ShipsTypes" Multiplicity="1" />
+          <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipsTypes">
+              <PropertyRef Name="ID_TypeShip" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="TypeShip_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище UP_laba_1ModelContainer">
+          <EntitySet Name="PilotsOfShip" EntityType="Self.PilotsOfShip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ShipsTypes" EntityType="Self.ShipsTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SpaceShips" EntityType="Self.SpaceShips" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__PilotsOfS__Space__5070F446" Association="Self.FK__PilotsOfS__Space__5070F446">
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+            <End Role="PilotsOfShip" EntitySet="PilotsOfShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SpaceShip__TypeS__4CA06362" Association="Self.FK__SpaceShip__TypeS__4CA06362">
+            <End Role="ShipsTypes" EntitySet="ShipsTypes" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UP_laba_1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PilotsOfShip">
+          <Key>
+            <PropertyRef Name="ID_Pilot" />
+          </Key>
+          <Property Name="ID_Pilot" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NamePilot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SurnamePilot" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AgePilot" Type="Int32" Nullable="false" />
+          <Property Name="SpaceShip_ID" Type="Int32" />
+          <NavigationProperty Name="SpaceShips" Relationship="Self.FK__PilotsOfS__Space__5070F446" FromRole="PilotsOfShip" ToRole="SpaceShips" />
+        </EntityType>
+        <EntityType Name="ShipsTypes">
+          <Key>
+            <PropertyRef Name="ID_TypeShip" />
+          </Key>
+          <Property Name="ID_TypeShip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Types_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="SpaceShips" Relationship="Self.FK__SpaceShip__TypeS__4CA06362" FromRole="ShipsTypes" ToRole="SpaceShips" />
+        </EntityType>
+        <EntityType Name="SpaceShips">
+          <Key>
+            <PropertyRef Name="ID_SpaceShip" />
+          </Key>
+          <Property Name="ID_SpaceShip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameShip" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="AmountFlights" Type="Int32" Nullable="false" />
+          <Property Name="TypeShip_ID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PilotsOfShip" Relationship="Self.FK__PilotsOfS__Space__5070F446" FromRole="SpaceShips" ToRole="PilotsOfShip" />
+          <NavigationProperty Name="ShipsTypes" Relationship="Self.FK__SpaceShip__TypeS__4CA06362" FromRole="SpaceShips" ToRole="ShipsTypes" />
+        </EntityType>
+        <Association Name="FK__PilotsOfS__Space__5070F446">
+          <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="0..1" />
+          <End Role="PilotsOfShip" Type="Self.PilotsOfShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SpaceShips">
+              <PropertyRef Name="ID_SpaceShip" />
+            </Principal>
+            <Dependent Role="PilotsOfShip">
+              <PropertyRef Name="SpaceShip_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__SpaceShip__TypeS__4CA06362">
+          <End Role="ShipsTypes" Type="Self.ShipsTypes" Multiplicity="1" />
+          <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ShipsTypes">
+              <PropertyRef Name="ID_TypeShip" />
+            </Principal>
+            <Dependent Role="SpaceShips">
+              <PropertyRef Name="TypeShip_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="UP_laba_1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PilotsOfShip" EntityType="Self.PilotsOfShip" />
+          <EntitySet Name="ShipsTypes" EntityType="Self.ShipsTypes" />
+          <EntitySet Name="SpaceShips" EntityType="Self.SpaceShips" />
+          <AssociationSet Name="FK__PilotsOfS__Space__5070F446" Association="Self.FK__PilotsOfS__Space__5070F446">
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+            <End Role="PilotsOfShip" EntitySet="PilotsOfShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK__SpaceShip__TypeS__4CA06362" Association="Self.FK__SpaceShip__TypeS__4CA06362">
+            <End Role="ShipsTypes" EntitySet="ShipsTypes" />
+            <End Role="SpaceShips" EntitySet="SpaceShips" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище UP_laba_1ModelContainer" CdmEntityContainer="UP_laba_1Entities">
+          <EntitySetMapping Name="PilotsOfShip">
+            <EntityTypeMapping TypeName="UP_laba_1Model.PilotsOfShip">
+              <MappingFragment StoreEntitySet="PilotsOfShip">
+                <ScalarProperty Name="ID_Pilot" ColumnName="ID_Pilot" />
+                <ScalarProperty Name="NamePilot" ColumnName="NamePilot" />
+                <ScalarProperty Name="SurnamePilot" ColumnName="SurnamePilot" />
+                <ScalarProperty Name="AgePilot" ColumnName="AgePilot" />
+                <ScalarProperty Name="SpaceShip_ID" ColumnName="SpaceShip_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ShipsTypes">
+            <EntityTypeMapping TypeName="UP_laba_1Model.ShipsTypes">
+              <MappingFragment StoreEntitySet="ShipsTypes">
+                <ScalarProperty Name="ID_TypeShip" ColumnName="ID_TypeShip" />
+                <ScalarProperty Name="Types_Name" ColumnName="Types_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SpaceShips">
+            <EntityTypeMapping TypeName="UP_laba_1Model.SpaceShips">
+              <MappingFragment StoreEntitySet="SpaceShips">
+                <ScalarProperty Name="ID_SpaceShip" ColumnName="ID_SpaceShip" />
+                <ScalarProperty Name="NameShip" ColumnName="NameShip" />
+                <ScalarProperty Name="AmountFlights" ColumnName="AmountFlights" />
+                <ScalarProperty Name="TypeShip_ID" ColumnName="TypeShip_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

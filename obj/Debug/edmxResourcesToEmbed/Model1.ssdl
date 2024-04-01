@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Хранилище UP_laba_1Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="PilotsOfShip">
+    <Key>
+      <PropertyRef Name="ID_Pilot" />
+    </Key>
+    <Property Name="ID_Pilot" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NamePilot" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SurnamePilot" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="AgePilot" Type="int" Nullable="false" />
+    <Property Name="SpaceShip_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="ShipsTypes">
+    <Key>
+      <PropertyRef Name="ID_TypeShip" />
+    </Key>
+    <Property Name="ID_TypeShip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Types_Name" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="SpaceShips">
+    <Key>
+      <PropertyRef Name="ID_SpaceShip" />
+    </Key>
+    <Property Name="ID_SpaceShip" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NameShip" Type="varchar" MaxLength="70" Nullable="false" />
+    <Property Name="AmountFlights" Type="int" Nullable="false" />
+    <Property Name="TypeShip_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__PilotsOfS__Space__5070F446">
+    <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="0..1" />
+    <End Role="PilotsOfShip" Type="Self.PilotsOfShip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SpaceShips">
+        <PropertyRef Name="ID_SpaceShip" />
+      </Principal>
+      <Dependent Role="PilotsOfShip">
+        <PropertyRef Name="SpaceShip_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SpaceShip__TypeS__4CA06362">
+    <End Role="ShipsTypes" Type="Self.ShipsTypes" Multiplicity="1" />
+    <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipsTypes">
+        <PropertyRef Name="ID_TypeShip" />
+      </Principal>
+      <Dependent Role="SpaceShips">
+        <PropertyRef Name="TypeShip_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Хранилище UP_laba_1ModelContainer">
+    <EntitySet Name="PilotsOfShip" EntityType="Self.PilotsOfShip" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ShipsTypes" EntityType="Self.ShipsTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SpaceShips" EntityType="Self.SpaceShips" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__PilotsOfS__Space__5070F446" Association="Self.FK__PilotsOfS__Space__5070F446">
+      <End Role="SpaceShips" EntitySet="SpaceShips" />
+      <End Role="PilotsOfShip" EntitySet="PilotsOfShip" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SpaceShip__TypeS__4CA06362" Association="Self.FK__SpaceShip__TypeS__4CA06362">
+      <End Role="ShipsTypes" EntitySet="ShipsTypes" />
+      <End Role="SpaceShips" EntitySet="SpaceShips" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

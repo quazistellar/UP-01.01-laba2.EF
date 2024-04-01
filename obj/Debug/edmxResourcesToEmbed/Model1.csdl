@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="UP_laba_1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="PilotsOfShip">
+    <Key>
+      <PropertyRef Name="ID_Pilot" />
+    </Key>
+    <Property Name="ID_Pilot" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NamePilot" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="SurnamePilot" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AgePilot" Type="Int32" Nullable="false" />
+    <Property Name="SpaceShip_ID" Type="Int32" />
+    <NavigationProperty Name="SpaceShips" Relationship="Self.FK__PilotsOfS__Space__5070F446" FromRole="PilotsOfShip" ToRole="SpaceShips" />
+  </EntityType>
+  <EntityType Name="ShipsTypes">
+    <Key>
+      <PropertyRef Name="ID_TypeShip" />
+    </Key>
+    <Property Name="ID_TypeShip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Types_Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="SpaceShips" Relationship="Self.FK__SpaceShip__TypeS__4CA06362" FromRole="ShipsTypes" ToRole="SpaceShips" />
+  </EntityType>
+  <EntityType Name="SpaceShips">
+    <Key>
+      <PropertyRef Name="ID_SpaceShip" />
+    </Key>
+    <Property Name="ID_SpaceShip" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameShip" Type="String" MaxLength="70" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="AmountFlights" Type="Int32" Nullable="false" />
+    <Property Name="TypeShip_ID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="PilotsOfShip" Relationship="Self.FK__PilotsOfS__Space__5070F446" FromRole="SpaceShips" ToRole="PilotsOfShip" />
+    <NavigationProperty Name="ShipsTypes" Relationship="Self.FK__SpaceShip__TypeS__4CA06362" FromRole="SpaceShips" ToRole="ShipsTypes" />
+  </EntityType>
+  <Association Name="FK__PilotsOfS__Space__5070F446">
+    <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="0..1" />
+    <End Role="PilotsOfShip" Type="Self.PilotsOfShip" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="SpaceShips">
+        <PropertyRef Name="ID_SpaceShip" />
+      </Principal>
+      <Dependent Role="PilotsOfShip">
+        <PropertyRef Name="SpaceShip_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__SpaceShip__TypeS__4CA06362">
+    <End Role="ShipsTypes" Type="Self.ShipsTypes" Multiplicity="1" />
+    <End Role="SpaceShips" Type="Self.SpaceShips" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="ShipsTypes">
+        <PropertyRef Name="ID_TypeShip" />
+      </Principal>
+      <Dependent Role="SpaceShips">
+        <PropertyRef Name="TypeShip_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="UP_laba_1Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="PilotsOfShip" EntityType="Self.PilotsOfShip" />
+    <EntitySet Name="ShipsTypes" EntityType="Self.ShipsTypes" />
+    <EntitySet Name="SpaceShips" EntityType="Self.SpaceShips" />
+    <AssociationSet Name="FK__PilotsOfS__Space__5070F446" Association="Self.FK__PilotsOfS__Space__5070F446">
+      <End Role="SpaceShips" EntitySet="SpaceShips" />
+      <End Role="PilotsOfShip" EntitySet="PilotsOfShip" />
+    </AssociationSet>
+    <AssociationSet Name="FK__SpaceShip__TypeS__4CA06362" Association="Self.FK__SpaceShip__TypeS__4CA06362">
+      <End Role="ShipsTypes" EntitySet="ShipsTypes" />
+      <End Role="SpaceShips" EntitySet="SpaceShips" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

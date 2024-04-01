@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище UP_laba_1ModelContainer" CdmEntityContainer="UP_laba_1Entities">
+    <EntitySetMapping Name="PilotsOfShip">
+      <EntityTypeMapping TypeName="UP_laba_1Model.PilotsOfShip">
+        <MappingFragment StoreEntitySet="PilotsOfShip">
+          <ScalarProperty Name="ID_Pilot" ColumnName="ID_Pilot" />
+          <ScalarProperty Name="NamePilot" ColumnName="NamePilot" />
+          <ScalarProperty Name="SurnamePilot" ColumnName="SurnamePilot" />
+          <ScalarProperty Name="AgePilot" ColumnName="AgePilot" />
+          <ScalarProperty Name="SpaceShip_ID" ColumnName="SpaceShip_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ShipsTypes">
+      <EntityTypeMapping TypeName="UP_laba_1Model.ShipsTypes">
+        <MappingFragment StoreEntitySet="ShipsTypes">
+          <ScalarProperty Name="ID_TypeShip" ColumnName="ID_TypeShip" />
+          <ScalarProperty Name="Types_Name" ColumnName="Types_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SpaceShips">
+      <EntityTypeMapping TypeName="UP_laba_1Model.SpaceShips">
+        <MappingFragment StoreEntitySet="SpaceShips">
+          <ScalarProperty Name="ID_SpaceShip" ColumnName="ID_SpaceShip" />
+          <ScalarProperty Name="NameShip" ColumnName="NameShip" />
+          <ScalarProperty Name="AmountFlights" ColumnName="AmountFlights" />
+          <ScalarProperty Name="TypeShip_ID" ColumnName="TypeShip_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
