@@ -23,8 +23,6 @@ namespace UP_laba2_EF
         public ShowTables()
         {
             InitializeComponent();
-
-
             pages.Content = new Types();
         }
     }

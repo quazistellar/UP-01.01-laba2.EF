@@ -79,18 +79,30 @@ namespace UP_laba2_EF
 
         private void types_Click(object sender, RoutedEventArgs e)
         {
-            SpaceShips ships = new SpaceShips();
-            ships.NameShip = types_ships.Text;
-            ships.AmountFlights = Convert.ToInt32(types_ships2.Text);
-            ships.TypeShip_ID = Convert.ToInt32(types_ships4.Text);
+            try
+            {
 
-            content.SpaceShips.Add(ships);
-            content.SaveChanges();
-            gridTypes.ItemsSource = content.SpaceShips.ToList();
+                SpaceShips ships = new SpaceShips();
+                ships.NameShip = types_ships.Text;
+                ships.AmountFlights = Convert.ToInt32(types_ships2.Text);
+                ships.TypeShip_ID = Convert.ToInt32(types_ships4.Text);
+
+                content.SpaceShips.Add(ships);
+                content.SaveChanges();
+                gridTypes.ItemsSource = content.SpaceShips.ToList();
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка");
+            }
         }
 
         private void action_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            types_ships.Text = null;
+            types_ships2.Text = null;
+            types_ships4.Text = null;
+
             if (action.SelectedIndex == 2)
             {
 
@@ -108,6 +120,8 @@ namespace UP_laba2_EF
                 types.Visibility = Visibility.Collapsed;
                 types_edit.Visibility = Visibility.Collapsed;
                 types_del.Visibility = Visibility.Visible;
+                types_ships2.Visibility = Visibility.Collapsed;
+                types_ships4.Visibility = Visibility.Collapsed;
 
                 vvod_type.Text = "Выберите запись для удаления\nи нажмите 'Удалить'";
                 types_ships.Visibility = Visibility.Collapsed;

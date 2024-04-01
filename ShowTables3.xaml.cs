@@ -19,12 +19,10 @@ namespace UP_laba2_EF
     /// </summary>
     public partial class ShowTables3 : Window
     {
-      
         public ShowTables3()
         {
             InitializeComponent();
-
-            pages3.Content = new SpaceShips();
+            pages3.Content = new Ships();
         }
     }
 }

@@ -44,6 +44,11 @@ namespace UP_laba2_EF
 
         private void action_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            types_ships.Text = null;
+            types_ships2.Text = null;
+            types_ships3.Text = null;
+            types_ships4.Text = null;
+
             if (action.SelectedIndex == 2)
             {
 
@@ -62,6 +67,10 @@ namespace UP_laba2_EF
                 types.Visibility = Visibility.Collapsed;
                 types_edit.Visibility = Visibility.Collapsed;
                 types_del.Visibility = Visibility.Visible;
+                types_ships.Visibility = Visibility.Collapsed;
+                types_ships2.Visibility = Visibility.Collapsed;
+                types_ships3.Visibility = Visibility.Collapsed;
+                types_ships4.Visibility = Visibility.Collapsed;
 
                 vvod_type.Text = "Выберите запись для удаления\nи нажмите 'Удалить'";
                 types_ships.Visibility = Visibility.Collapsed;
@@ -123,18 +132,27 @@ namespace UP_laba2_EF
 
         private void types_Click(object sender, RoutedEventArgs e)
         {
-            PilotsOfShip pilots = new PilotsOfShip();
-            pilots.NamePilot = types_ships.Text;
-            pilots.SurnamePilot = types_ships2.Text;
-            pilots.AgePilot = Convert.ToInt32(types_ships3.Text);
-            pilots.SpaceShip_ID = Convert.ToInt32(types_ships4.Text);
-            content.PilotsOfShip.Add(pilots);
-            content.SaveChanges();
-            gridTypes.ItemsSource = content.PilotsOfShip.ToList();
+            try
+            {
+                PilotsOfShip pilots = new PilotsOfShip();
+                pilots.NamePilot = types_ships.Text;
+                pilots.SurnamePilot = types_ships2.Text;
+                pilots.AgePilot = Convert.ToInt32(types_ships3.Text);
+                pilots.SpaceShip_ID = Convert.ToInt32(types_ships4.Text);
+                content.PilotsOfShip.Add(pilots);
+                content.SaveChanges();
+                gridTypes.ItemsSource = content.PilotsOfShip.ToList();
+            }
+            catch 
+            {
+                MessageBox.Show("Ошибка");
+            }
         }
 
         private void types_del_Click(object sender, RoutedEventArgs e)
         {
+          
+
             if (gridTypes.SelectedItem != null)
             {
                 var selected = gridTypes.SelectedItem as PilotsOfShip;

@@ -84,6 +84,9 @@ namespace UP_laba2_EF
 
         private void action_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            types_ships.Text = null;
+
+
             if (action.SelectedIndex == 2)
             {
 
